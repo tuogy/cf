@@ -33,22 +33,33 @@ typedef long long ll;
 const int INT_INF = 0x3f3f3f3f, INT_NINF = 0xc0c0c0c0;
 const int d4r[] = {0, 1, 0, -1}, d4c[] = {1, 0, -1, 0};
 
-bool distinct(int n) {
-    bool exist[10] = {0};
-    for (; n; n /= 10) {
-        if (exist[n % 10]) return false;
-        exist[n % 10] = true;
-    }
-    return true;
-}
+bool pass[101];
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n; cin >> n; n++;
-    while (!distinct(n)) n++;
-    cout << n << endl;
+    int n; cin >> n;
+    memset(pass, 0, (n + 1) * sizeof(bool));
+    int p, q, x;
+    cin >> p;
+    for (int i = 0; i < p; i++) {
+        cin >> x;
+        pass[x] = true;
+    }
+    cin >> q;
+    for (int i = 0; i < q; i++) {
+        cin >> x;
+        pass[x] = true;
+    }
+    for (int i = 1; i <= n; i++) {
+        if (!pass[i]) {
+            cout << "Oh, my keyboard!" << endl;
+            return 0;
+        }
+    }
+    cout << "I become the guy." << endl;
+    
 
     return 0;
 }
